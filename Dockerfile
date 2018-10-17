@@ -33,9 +33,9 @@ RUN cd /tmp/metaverse \
 # TODO...
 # Should has `make test` here
 
-RUN cd /tmp/metaverse/utils && /bin/bash setup_mvs_conf.sh
+# RUN cd /tmp/metaverse/utils && /bin/bash setup_mvs_conf.sh
 
-VOLUME [~/.metaverse]
+# VOLUME [~/.metaverse]
 
 # P2P Network
 EXPOSE 5251
@@ -44,4 +44,4 @@ EXPOSE 8820
 # Websocket notifcations
 EXPOSE 8821
 
-ENTRYPOINT ["/usr/local/bin/mvsd"]
+CMD ["/usr/local/bin/mvsd"]
