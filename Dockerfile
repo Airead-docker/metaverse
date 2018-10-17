@@ -44,4 +44,4 @@ EXPOSE 8820
 # Websocket notifcations
 EXPOSE 8821
 
-ENTRYPOINT ["/usr/local/bin/mvsd"]
+CMD ["/usr/local/bin/mvsd"]
