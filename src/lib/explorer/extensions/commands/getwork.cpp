@@ -40,11 +40,13 @@ console_result getwork::invoke(Json::Value& jv_output,
     std::string seed_hash;
     std::string header_hash;
     std::string boundary;
+    std::string previous_block_hash;
+    uint32_t number;
 
     auto& blockchain = node.chain_impl();
     auto& miner = node.miner();
 
-    auto ret = miner.get_work(seed_hash, header_hash, boundary);
+    auto ret = miner.get_f2_work(seed_hash, header_hash, boundary, number, previous_block_hash);
 
     auto& aroot = jv_output;
 
@@ -54,6 +56,8 @@ console_result getwork::invoke(Json::Value& jv_output,
         result.append(header_hash);
         result.append(seed_hash);
         result.append(boundary);
+        result.append(number);
+        result.append(previous_block_hash);
 
         if (get_api_version() == 1) {
             aroot["result"] = result;

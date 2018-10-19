@@ -87,6 +87,7 @@ public:
 
     block_ptr get_block(bool is_force_create_block = false);
     bool get_work(std::string& seed_hash, std::string& header_hash, std::string& boundary);
+    bool get_f2_work(std::string& seed_hash, std::string& header_hash, std::string& boundary, uint32_t &number, std::string& previous_hash);
     bool put_result(const std::string& nonce, const std::string& mix_hash,
         const std::string& header_hash, const uint64_t &nounce_mask);
     bool set_miner_public_key(const string& public_key);

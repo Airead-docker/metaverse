@@ -31,6 +31,7 @@
 #include <metaverse/consensus/libdevcore/BasicType.h>
 #include <metaverse/bitcoin/chain/script/operation.hpp>
 #include <metaverse/bitcoin/config/hash160.hpp>
+#include <metaverse/bitcoin/config/hash256.hpp>
 #include <metaverse/bitcoin/wallet/ec_public.hpp>
 #include <metaverse/bitcoin/constants.hpp>
 #include <metaverse/blockchain/validate_block.hpp>
@@ -742,6 +743,21 @@ bool miner::get_work(std::string& seed_hash, std::string& header_hash, std::stri
         header_hash = "0x" + to_string(HeaderAux::hashHead(new_block_->header));
         seed_hash = "0x" + to_string(HeaderAux::seedHash(new_block_->header));
         boundary = "0x" + to_string(HeaderAux::boundary(new_block_->header));
+        return true;
+    }
+    return false;
+}
+
+bool miner::get_f2_work(std::string& seed_hash, std::string& header_hash, std::string& boundary, uint32_t& number, std::string& previous_block_hash)
+{
+    block_ptr block = get_block();
+    if (block) {
+        // uint32_t number
+        number = new_block_->header.number;
+        header_hash = "0x" + to_string(HeaderAux::hashHead(new_block_->header));
+        seed_hash = "0x" + to_string(HeaderAux::seedHash(new_block_->header));
+        boundary = "0x" + to_string(HeaderAux::boundary(new_block_->header));
+        previous_block_hash = "0x" + libbitcoin::config::hash256(new_block_->header.previous_block_hash).to_string();
         return true;
     }
     return false;
